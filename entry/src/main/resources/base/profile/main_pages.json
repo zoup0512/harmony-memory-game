@@ -1,0 +1,10 @@
+{
+  "src": [
+    "pages/MainPage",
+    "pages/MemoryGridPage",
+    "pages/RotatingGridPage",
+    "pages/SchultzTablesPage",
+    "pages/Game248Page",
+    "pages/HexagonsPage"
+  ]
+}

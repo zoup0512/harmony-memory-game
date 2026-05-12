@@ -1,0 +1,9 @@
+.gradle
+build/
+.hvigor/
+oh_modules/
+local.properties
+*.hap
+*.app
+/.idea/
+/_ref/

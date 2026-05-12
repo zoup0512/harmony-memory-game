@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "记忆游戏"
+    },
+    {
+      "name": "app_desc",
+      "value": "脑力训练记忆游戏"
+    }
+  ]
+}
