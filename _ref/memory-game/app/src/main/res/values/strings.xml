@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Memory Brain Training</string>
+    
+    <!-- Facebook -->
+    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+    
+    <!-- Game Names -->
+    <string name="game_name_1">Memory Grid</string>
+    <string name="game_name_2">Rotating Grid</string>
+    <string name="game_name_3">Hexagons</string>
+    <string name="game_name_4">Who\'s New?</string>
+    <string name="game_name_5">Count\'em All</string>
+    <string name="game_name_6">Follow the Path</string>
+    <string name="game_name_7">Image Vortex</string>
+    <string name="game_name_8">Catch Them</string>
+    <string name="game_name_9">Find the Picture</string>
+    <string name="game_name_10">One and Only</string>
+    <string name="game_name_11">Correctly?</string>
+    <string name="game_name_12">More, Less</string>
+    <string name="game_name_13">All the Same</string>
+    <string name="game_name_14">Sort the Digits</string>
+    <string name="game_name_15">Paper Planes</string>
+    <string name="game_name_16">Like Previous?</string>
+    <string name="game_name_17">248</string>
+    <string name="game_name_18">Pyramids</string>
+    <string name="game_name_19">Find All</string>
+    <string name="game_name_20">Colors</string>
+    <string name="game_name_21">Symmetry</string>
+    <string name="game_name_22">Laser</string>
+    <string name="game_name_23">Schultz Tables</string>
+    
+    <!-- Categories -->
+    <string name="categoryMemory">Memory</string>
+    <string name="categoryAttention">Attention</string>
+    <string name="categorySpeed">Speed</string>
+    <string name="categoryProblemSolving">Problem Solving</string>
+    <string name="categoryFlexibility">Flexibility</string>
+    <string name="categoryImagination">Imagination</string>
+    <string name="brain_games">Brain Games</string>
+    
+    <!-- Common -->
+    <string name="play">Play</string>
+    <string name="start">Start</string>
+    <string name="continue_text">Continue</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="quit">Quit</string>
+    <string name="retry">Retry</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Trophies -->
+    <string name="won_glass">Glass Trophy</string>
+    <string name="won_bronze">Bronze Trophy</string>
+    <string name="won_silver">Silver Trophy</string>
+    <string name="won_gold">Gold Trophy</string>
+    
+    <!-- Banners -->
+    <string name="banner_text2_2">Unlock All Games</string>
+    <string name="smart">Smart Brain Games</string>
+</resources>

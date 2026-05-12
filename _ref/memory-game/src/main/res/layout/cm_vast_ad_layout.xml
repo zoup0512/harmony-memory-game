@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:gravity="center" android:id="@id/vast_rl" android:layout_width="fill_parent" android:layout_height="185.0dip">
+        <com.cmcm.picks.vastvideo.VastTextureView android:id="@id/vast_ad" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <ImageView android:id="@id/vast_img_stranch" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/vast_stranch" android:layout_alignParentRight="true" />
+        <ImageView android:id="@id/vast_img_volume" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="13.0dip" android:src="@drawable/vast_volume_off" android:layout_toLeftOf="@id/vast_img_stranch" />
+    </RelativeLayout>
+    <ProgressBar android:id="@id/vast_progress" android:layout_width="fill_parent" android:layout_height="3.0dip" android:progressDrawable="@drawable/vast_progress_style" android:layout_below="@id/vast_rl" style="?android:attr/progressBarStyleHorizontal" />
+    <RelativeLayout android:gravity="center" android:id="@id/cover_top" android:background="#99000000" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="185.0dip">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/vast_watch_again" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="72.0dip">
+            <ImageView android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/vast_watchagain" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="watch again" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/vast_install" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/vast_watch_again">
+            <ImageView android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/vast_install" />
+            <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/vast_detail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="install" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

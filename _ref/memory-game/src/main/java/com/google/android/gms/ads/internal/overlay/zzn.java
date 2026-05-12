@@ -1,0 +1,19 @@
+package com.google.android.gms.ads.internal.overlay;
+
+import android.content.Context;
+import android.support.annotation.Nullable;
+import com.google.android.gms.internal.zzdi;
+import com.google.android.gms.internal.zzdk;
+import com.google.android.gms.internal.zzin;
+import com.google.android.gms.internal.zzlh;
+
+@zzin
+public class zzn extends zzj {
+    @Nullable
+    public zzi zza(Context context, zzlh com_google_android_gms_internal_zzlh, int i, boolean z, zzdk com_google_android_gms_internal_zzdk, zzdi com_google_android_gms_internal_zzdi) {
+        if (!zzq(context)) {
+            return null;
+        }
+        return new zzc(context, z, zzg(com_google_android_gms_internal_zzlh), new zzx(context, com_google_android_gms_internal_zzlh.zzum(), com_google_android_gms_internal_zzlh.getRequestId(), com_google_android_gms_internal_zzdk, com_google_android_gms_internal_zzdi));
+    }
+}
