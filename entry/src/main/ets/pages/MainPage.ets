@@ -60,6 +60,36 @@ function categoryIcon(cat: string): string {
   }
 }
 
+function gamePageUrl(id: number): string {
+  switch (id) {
+    case 1:  return 'pages/MemoryGridPage';
+    case 2:  return 'pages/HexagonsPage';
+    case 3:  return 'pages/WhosNewPage';
+    case 4:  return 'pages/RotatingGridPage';
+    case 5:  return 'pages/FollowThePathPage';
+    case 6:  return 'pages/ImageVortexPage';
+    case 7:  return 'pages/CatchThemPage';
+    case 8:  return 'pages/FindThePicturePage';
+    case 11: return 'pages/MoreLessPage';
+    case 12: return 'pages/AllTheSamePage';
+    case 13: return 'pages/SortTheDigitsPage';
+    case 14: return 'pages/PaperPlanesPage';
+    case 15: return 'pages/LikePreviousPage';
+    case 16: return 'pages/Game248Page';
+    case 17: return 'pages/PyramidsPage';
+    case 18: return 'pages/FindAllPage';
+    case 19: return 'pages/CountEmAllPage';
+    case 20: return 'pages/SymmetryPage';
+    case 21: return 'pages/LaserPage';
+    case 22: return 'pages/SchultzTablesPage';
+    case 24: return 'pages/OneAndOnlyPage';
+    case 25: return 'pages/CorrectlyPage';
+    case 26: return 'pages/ColorsPage';
+    case 100: return 'pages/MatchPairsThemePage';
+    default: return 'pages/MemoryGridPage';
+  }
+}
+
 function categoryName(cat: string): string {
   switch (cat) {
     case CAT_MEMORY:      return '记忆';
@@ -76,6 +106,7 @@ function categoryName(cat: string): string {
 
 const ALL_GAMES: GameEntry[] = [
   // Memory (记忆)
+  { id: 100, name: '翻牌配对',   description: '经典翻牌找对 · 3主题×6难度',  category: CAT_MEMORY },
   { id: 1,  name: '记忆网格',   description: '记住网格中的位置',       category: CAT_MEMORY },
   { id: 2,  name: '六边形',     description: '六边形网格记忆游戏',     category: CAT_MEMORY },
   { id: 3,  name: '谁是新的',   description: '识别新出现的元素',       category: CAT_MEMORY },
@@ -153,7 +184,8 @@ struct GameCard {
   onPlay: () => void = () => {};
 
   private isAvailable(): boolean {
-    return this.gameId === 1 || this.gameId === 4 || this.gameId === 22 || this.gameId === 16 || this.gameId === 2;
+    // All 23 games are implemented
+    return true;
   }
 
   build() {
@@ -288,17 +320,8 @@ struct SprintTab {
                 gameDesc: game.description,
                 category: game.category,
                 onPlay: () => {
-                  if (game.id === 4) {
-                    router.pushUrl({ url: 'pages/RotatingGridPage' });
-                  } else if (game.id === 22) {
-                    router.pushUrl({ url: 'pages/SchultzTablesPage' });
-                  } else if (game.id === 16) {
-                    router.pushUrl({ url: 'pages/Game248Page' });
-                  } else if (game.id === 2) {
-                    router.pushUrl({ url: 'pages/HexagonsPage' });
-                  } else {
-                    router.pushUrl({ url: 'pages/MemoryGridPage' });
-                  }
+                  const url = gamePageUrl(game.id);
+                  router.pushUrl({ url });
                 }
               })
               .padding({ left: 16, right: 16 })
