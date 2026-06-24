@@ -1,4 +1,4 @@
-import { router } from '@kit.ArkUI';
+export {}
 
 const PAGE_BG = '#F3F8FF';
 const CARD_BG = '#FFFFFF';
@@ -510,7 +510,7 @@ struct Game248Page {
         visible: this.isPaused,
         onResume: () => { this.isPaused = false; if (!this.isGameOver) { this.timerId = setInterval(() => { this.timeRemainingMs = this.timeRemainingMs - 100; if (this.timeRemainingMs <= 0) { this.timeRemainingMs = 0; this.clearTimer(); this.isGameOver = true; } }, 100); } },
         onRestart: () => { this.isPaused = false; this.startGame(); },
-        onExit: () => { this.clearTimer(); router.back(); }
+        onExit: () => { this.clearTimer(); this.getUIContext().getRouter().back(); }
       })
 
       G248Over({
@@ -518,7 +518,7 @@ struct Game248Page {
         totalScore: this.totalScore,
         stars: stars248(this.totalScore),
         onPlayAgain: () => this.startGame(),
-        onExit: () => { this.clearTimer(); router.back(); }
+        onExit: () => { this.clearTimer(); this.getUIContext().getRouter().back(); }
       })
 
       if (this.showTutorial) {

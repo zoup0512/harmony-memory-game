@@ -1,4 +1,4 @@
-import { common } from '@kit.AbilityKit';
+export {}
 
 const PAGE_BG = '#F3F8FF';
 const CARD_BG = '#FFFFFF';
@@ -637,7 +637,7 @@ struct MemoryGridPage {
   }
 
   private exitGame(): void {
-    (getContext(this) as common.UIAbilityContext).terminateSelf();
+    this.getUIContext().getRouter().back();
   }
 
   // ─── Build ─────────────────────────────────────────────────────────────────────

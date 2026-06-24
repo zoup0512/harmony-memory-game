@@ -1,4 +1,4 @@
-import { router } from '@kit.ArkUI';
+export {}
 
 const PAGE_BG = '#F3F8FF';
 const CARD_BG = '#FFFFFF';
@@ -626,7 +626,7 @@ struct RotatingGridPage {
   private exitGame(): void {
     this.clearCountdown();
     this.flowId = this.flowId + 1;
-    router.back();
+    this.getUIContext().getRouter().back();
   }
 
   // ─── Timer display ─────────────────────────────────────────────────────────────

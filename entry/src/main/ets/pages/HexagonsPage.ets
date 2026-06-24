@@ -1,4 +1,4 @@
-import { router } from '@kit.ArkUI';
+export {}
 
 const PAGE_BG = '#F3F8FF';
 const CARD_BG = '#FFFFFF';
@@ -441,7 +441,7 @@ struct HexagonsPage {
           }
         },
         onRestart: () => { this.isPaused = false; this.startGame(); },
-        onExit: () => { this.flowId = this.flowId + 1; router.back(); }
+        onExit: () => { this.flowId = this.flowId + 1; this.getUIContext().getRouter().back(); }
       })
 
       HexGameOver({
@@ -450,7 +450,7 @@ struct HexagonsPage {
         level: this.level,
         stars: hexStars(this.level),
         onPlayAgain: () => this.startGame(),
-        onExit: () => { this.flowId = this.flowId + 1; router.back(); }
+        onExit: () => { this.flowId = this.flowId + 1; this.getUIContext().getRouter().back(); }
       })
     }
     .width('100%').height('100%')

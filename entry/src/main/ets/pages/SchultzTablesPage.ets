@@ -1,4 +1,4 @@
-import { router } from '@kit.ArkUI';
+export {}
 
 const PAGE_BG = '#F3F8FF';
 const CARD_BG = '#FFFFFF';
@@ -403,7 +403,7 @@ struct SchultzTablesPage {
 
   private exitGame(): void {
     this.clearTimer();
-    router.back();
+    this.getUIContext().getRouter().back();
   }
 
   // ── Display helpers ────────────────────────────────

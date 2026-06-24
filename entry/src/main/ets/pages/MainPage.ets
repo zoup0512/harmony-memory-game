@@ -1,4 +1,4 @@
-import { router } from '@kit.ArkUI';
+export {}
 
 // ─── Data types ────────────────────────────────────────────────────────────────
 
@@ -40,24 +40,24 @@ const UI_DANGER = '#EF5B5B';
 const UI_STAR = '#FFC83D';
 
 const CATEGORIES: CategoryEntry[] = [
-  { id: CAT_ALL,        name: '全部',   color: '#757575', icon: '◈' },
-  { id: CAT_MEMORY,     name: '记忆',   color: '#03A9F4', icon: '◉' },
-  { id: CAT_ATTENTION,  name: '注意力', color: '#009688', icon: '◎' },
-  { id: CAT_SPEED,      name: '速度',   color: '#F44336', icon: '◆' },
-  { id: CAT_PROBLEM,    name: '问题解决', color: '#673AB7', icon: '◧' },
-  { id: CAT_FLEXIBILITY,name: '灵活性', color: '#FFC107', icon: '⇄' },
-  { id: CAT_IMAGINATION,name: '想象力', color: '#00BCD4', icon: '◈' },
+  { id: CAT_ALL,        name: '全部',   color: UI_SUB,      icon: '◈' },
+  { id: CAT_MEMORY,     name: '记忆',   color: '#5B8DEF',   icon: '◉' },
+  { id: CAT_ATTENTION,  name: '注意力', color: '#00A896',   icon: '◎' },
+  { id: CAT_SPEED,      name: '速度',   color: UI_DANGER,   icon: '◆' },
+  { id: CAT_PROBLEM,    name: '问题解决', color: '#7E57C2', icon: '◧' },
+  { id: CAT_FLEXIBILITY,name: '灵活性', color: UI_STAR,     icon: '⇄' },
+  { id: CAT_IMAGINATION,name: '想象力', color: '#26C6DA',   icon: '◈' },
 ];
 
 function categoryColor(cat: string): string {
   switch (cat) {
-    case CAT_MEMORY:      return '#03A9F4';
-    case CAT_ATTENTION:   return '#009688';
-    case CAT_SPEED:       return '#F44336';
-    case CAT_PROBLEM:     return '#673AB7';
-    case CAT_FLEXIBILITY: return '#FFC107';
-    case CAT_IMAGINATION: return '#00BCD4';
-    default:              return '#757575';
+    case CAT_MEMORY:      return '#5B8DEF';
+    case CAT_ATTENTION:   return '#00A896';
+    case CAT_SPEED:       return UI_DANGER;
+    case CAT_PROBLEM:     return '#7E57C2';
+    case CAT_FLEXIBILITY: return UI_STAR;
+    case CAT_IMAGINATION: return '#26C6DA';
+    default:              return UI_SUB;
   }
 }
 
@@ -345,16 +345,17 @@ struct SprintTab {
                 ability: game.ability,
                 difficulty: game.difficulty,
                 onPlay: () => {
+                  const r = this.getUIContext().getRouter();
                   if (game.id === 4) {
-                    router.pushUrl({ url: 'pages/RotatingGridPage' });
+                    r.pushUrl({ url: 'pages/RotatingGridPage' });
                   } else if (game.id === 22) {
-                    router.pushUrl({ url: 'pages/SchultzTablesPage' });
+                    r.pushUrl({ url: 'pages/SchultzTablesPage' });
                   } else if (game.id === 16) {
-                    router.pushUrl({ url: 'pages/Game248Page' });
+                    r.pushUrl({ url: 'pages/Game248Page' });
                   } else if (game.id === 2) {
-                    router.pushUrl({ url: 'pages/HexagonsPage' });
+                    r.pushUrl({ url: 'pages/HexagonsPage' });
                   } else {
-                    router.pushUrl({ url: 'pages/MemoryGridPage' });
+                    r.pushUrl({ url: 'pages/MemoryGridPage' });
                   }
                 }
               })
