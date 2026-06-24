@@ -1,6 +1,15 @@
 import { router } from '@kit.ArkUI';
 
-const CELL_COLORS: string[] = ['#E57373','#64B5F6','#81C784','#FFD54F'];
+const PAGE_BG = '#F3F8FF';
+const CARD_BG = '#FFFFFF';
+const TEXT_MAIN = '#1F2937';
+const TEXT_SUB = '#6B7280';
+const BORDER_SOFT = '#E5E7EB';
+const THEME = '#7E57C2';
+const DANGER = '#EF5B5B';
+const SUCCESS = '#36B37E';
+
+const CELL_COLORS: string[] = ['#F27D7D','#6FA8F5','#7FD18B','#FFD76B'];
 const GAME_DURATION_MS = 60000;
 const BOARD_GAP = 4;
 
@@ -56,7 +65,7 @@ struct Tutorial248 {
   @Builder ScoreTable() {
     Column({ space: 6 }) {
       ForEach(['2连 → 4分','3连 → 8分','5连 → 32分','9连 → 512分'] as string[], (s: string) => {
-        Text(s).fontSize(15).fontColor('#424242').fontWeight(FontWeight.Medium)
+        Text(s).fontSize(15).fontColor(TEXT_SUB).fontWeight(FontWeight.Medium)
       }, (s: string) => s)
     }
   }
@@ -82,27 +91,27 @@ struct Tutorial248 {
 
   @Builder StarsDemo() {
     Row({ space: 8 }) {
-      Text('★').fontSize(44).fontColor('#FFC107')
-      Text('★').fontSize(44).fontColor('#FFC107')
-      Text('★').fontSize(44).fontColor('#FFC107')
+      Text('★').fontSize(44).fontColor('#FFC83D')
+      Text('★').fontSize(44).fontColor('#FFC83D')
+      Text('★').fontSize(44).fontColor('#FFC83D')
     }
   }
 
   build() {
     Stack() {
-      Column().width('100%').height('100%').backgroundColor('rgba(0,0,0,0.7)')
+      Column().width('100%').height('100%').backgroundColor('rgba(15,23,42,0.65)')
       Column({ space: 20 }) {
         Row() {
           Blank()
-          Text('跳过').fontSize(14).fontColor('#9E9E9E')
+          Text('跳过').fontSize(14).fontColor(TEXT_SUB)
             .onClick(() => this.onFinish())
         }.width('100%')
 
         Text(this.icons[this.step]).fontSize(48)
         Text(this.titles[this.step])
-          .fontSize(22).fontWeight(FontWeight.Bold).fontColor('#212121')
+          .fontSize(22).fontWeight(FontWeight.Bold).fontColor(TEXT_MAIN)
         Text(this.descs[this.step])
-          .fontSize(14).fontColor('#616161').textAlign(TextAlign.Center)
+          .fontSize(14).fontColor(TEXT_SUB).textAlign(TextAlign.Center)
           .lineHeight(22).padding({ left: 8, right: 8 })
 
         if (this.step === 1) { this.MiniGrid() }
@@ -113,30 +122,30 @@ struct Tutorial248 {
         Row({ space: 8 }) {
           ForEach([0,1,2,3,4] as number[], (i: number) => {
             Column().width(i === this.step ? 20 : 8).height(8).borderRadius(4)
-              .backgroundColor(i === this.step ? '#673AB7' : '#E0E0E0')
+              .backgroundColor(i === this.step ? THEME : BORDER_SOFT)
               .animation({ duration: 200, curve: Curve.EaseOut })
           }, (i: number) => `dot_${i}`)
         }
 
         Row({ space: 12 }) {
           if (this.step > 0) {
-            Button({ type: ButtonType.Normal }) { Text('上一步').fontSize(15).fontColor('#673AB7') }
-            .height(44).padding({ left: 20, right: 20 }).backgroundColor('#EDE7F6').borderRadius(22)
+            Button({ type: ButtonType.Normal }) { Text('上一步').fontSize(15).fontColor(THEME) }
+            .height(44).padding({ left: 20, right: 20 }).backgroundColor('#F3F0FF').borderRadius(22)
             .onClick(() => { this.step = this.step - 1; })
           }
           if (this.step < 4) {
             Button({ type: ButtonType.Normal }) { Text('下一步').fontSize(15).fontColor('#FFFFFF') }
-            .height(44).padding({ left: 28, right: 28 }).backgroundColor('#673AB7').borderRadius(22)
+            .height(44).padding({ left: 28, right: 28 }).backgroundColor(THEME).borderRadius(22)
             .onClick(() => { this.step = this.step + 1; })
           } else {
             Button({ type: ButtonType.Normal }) { Text('开始游戏！').fontSize(16).fontColor('#FFFFFF').fontWeight(FontWeight.Bold) }
-            .height(50).padding({ left: 32, right: 32 }).backgroundColor('#4CAF50').borderRadius(25)
+            .height(50).padding({ left: 32, right: 32 }).backgroundColor(SUCCESS).borderRadius(25)
             .onClick(() => this.onFinish())
           }
         }
       }
-      .padding(24).backgroundColor('#FFFFFF').borderRadius(20)
-      .shadow({ radius: 20, color: '#40000000', offsetX: 0, offsetY: 8 })
+      .padding(24).backgroundColor(CARD_BG).borderRadius(24)
+      .shadow({ radius: 24, color: '#30000000', offsetX: 0, offsetY: 10 })
       .width('92%').alignItems(HorizontalAlign.Center)
     }
     .width('100%').height('100%').position({ x: 0, y: 0 }).zIndex(300)
@@ -154,20 +163,20 @@ struct G248Pause {
   build() {
     if (this.visible) {
       Stack() {
-        Column().width('100%').height('100%').backgroundColor('rgba(0,0,0,0.5)')
+        Column().width('100%').height('100%').backgroundColor('rgba(15,23,42,0.45)')
         Column({ space: 14 }) {
-          Text('游戏暂停').fontSize(22).fontWeight(FontWeight.Bold)
-          Text('248').fontSize(14).fontColor('#757575')
-          Divider().color('#E0E0E0')
+          Text('游戏暂停').fontSize(22).fontWeight(FontWeight.Bold).fontColor(TEXT_MAIN)
+          Text('248').fontSize(14).fontColor(TEXT_SUB)
+          Divider().color(BORDER_SOFT)
           Button({ type: ButtonType.Normal }) { Row({ space:8 }) { Text('▶').fontColor('#FFF'); Text('继续').fontColor('#FFF') }.justifyContent(FlexAlign.Center) }
-          .width('100%').height(52).backgroundColor('#4CAF50').borderRadius(10).onClick(() => this.onResume())
+          .width('100%').height(52).backgroundColor(SUCCESS).borderRadius(12).onClick(() => this.onResume())
           Button({ type: ButtonType.Normal }) { Row({ space:8 }) { Text('↺').fontColor('#FFF'); Text('重新开始').fontColor('#FFF') }.justifyContent(FlexAlign.Center) }
-          .width('100%').height(52).backgroundColor('#2196F3').borderRadius(10).onClick(() => this.onRestart())
+          .width('100%').height(52).backgroundColor(THEME).borderRadius(12).onClick(() => this.onRestart())
           Button({ type: ButtonType.Normal }) { Row({ space:8 }) { Text('✕').fontColor('#FFF'); Text('退出').fontColor('#FFF') }.justifyContent(FlexAlign.Center) }
-          .width('100%').height(52).backgroundColor('#F44336').borderRadius(10).onClick(() => this.onExit())
+          .width('100%').height(52).backgroundColor(DANGER).borderRadius(12).onClick(() => this.onExit())
         }
-        .padding(24).backgroundColor('#FFF').borderRadius(16)
-        .shadow({ radius: 16, color: '#3A000000', offsetX: 0, offsetY: 8 })
+        .padding(24).backgroundColor(CARD_BG).borderRadius(24)
+        .shadow({ radius: 24, color: '#26000000', offsetX: 0, offsetY: 10 })
         .width('85%').alignItems(HorizontalAlign.Center)
       }
       .width('100%').height('100%').position({ x: 0, y: 0 }).zIndex(100)
@@ -187,25 +196,25 @@ struct G248Over {
   build() {
     if (this.visible) {
       Stack() {
-        Column().width('100%').height('100%').backgroundColor('rgba(0,0,0,0.6)')
+        Column().width('100%').height('100%').backgroundColor('rgba(15,23,42,0.50)')
         Column({ space: 18 }) {
-          Text('时间到！').fontSize(30).fontWeight(FontWeight.Bold)
+          Text('时间到！').fontSize(30).fontWeight(FontWeight.Bold).fontColor(TEXT_MAIN)
           Row({ space: 6 }) {
-            Text(this.stars>=1?'★':'☆').fontSize(38).fontColor(this.stars>=1?'#FFC107':'#BDBDBD')
-            Text(this.stars>=2?'★':'☆').fontSize(38).fontColor(this.stars>=2?'#FFC107':'#BDBDBD')
-            Text(this.stars>=3?'★':'☆').fontSize(38).fontColor(this.stars>=3?'#FFC107':'#BDBDBD')
+            Text(this.stars>=1?'★':'☆').fontSize(38).fontColor(this.stars>=1?'#FFC83D':'#CBD5E1')
+            Text(this.stars>=2?'★':'☆').fontSize(38).fontColor(this.stars>=2?'#FFC83D':'#CBD5E1')
+            Text(this.stars>=3?'★':'☆').fontSize(38).fontColor(this.stars>=3?'#FFC83D':'#CBD5E1')
           }
           Row({ space: 6 }) {
-            Text('总得分：').fontSize(16).fontColor('#424242')
-            Text(this.totalScore.toString()).fontSize(26).fontWeight(FontWeight.Bold).fontColor('#673AB7')
+            Text('总得分：').fontSize(16).fontColor(TEXT_SUB)
+            Text(this.totalScore.toString()).fontSize(26).fontWeight(FontWeight.Bold).fontColor(THEME)
           }
           Button({ type: ButtonType.Normal }) { Text('再玩一次').fontSize(18).fontWeight(FontWeight.Bold).fontColor('#FFFFFF') }
-          .width('100%').height(56).backgroundColor('#4CAF50').borderRadius(12).onClick(() => this.onPlayAgain())
+          .width('100%').height(56).backgroundColor(SUCCESS).borderRadius(12).onClick(() => this.onPlayAgain())
           Button({ type: ButtonType.Normal }) { Text('退出游戏').fontSize(16).fontColor('#FFFFFF') }
-          .width('100%').height(48).backgroundColor('#F44336').borderRadius(12).onClick(() => this.onExit())
+          .width('100%').height(48).backgroundColor(DANGER).borderRadius(12).onClick(() => this.onExit())
         }
-        .padding(28).backgroundColor('#FFF').borderRadius(20)
-        .shadow({ radius: 20, color: '#3A000000', offsetX: 0, offsetY: 8 })
+        .padding(28).backgroundColor(CARD_BG).borderRadius(24)
+        .shadow({ radius: 24, color: '#26000000', offsetX: 0, offsetY: 10 })
         .width('85%').alignItems(HorizontalAlign.Center)
       }
       .width('100%').height('100%').position({ x: 0, y: 0 }).zIndex(200)
@@ -397,7 +406,7 @@ struct Game248Page {
         Column().width('100%').height('100%').backgroundColor('transparent')
       } else if (this.isArrowCell(idx)) {
         Stack() {
-          Column().width('100%').height('100%').backgroundColor('#546E7A').borderRadius(8)
+          Column().width('100%').height('100%').backgroundColor('#64748B').borderRadius(8)
           Text(this.arrowLabel(this.colOf(idx), this.rowOf(idx))).fontSize(18).fontColor('#FFFFFF').fontWeight(FontWeight.Bold)
         }
         .width('100%').height('100%')
@@ -417,7 +426,7 @@ struct Game248Page {
         }
         .width('100%').height('100%')
       } else {
-        Column().width('100%').height('100%').backgroundColor('#E0E0E0').borderRadius(8)
+        Column().width('100%').height('100%').backgroundColor(BORDER_SOFT).borderRadius(8)
       }
     }
   }
@@ -427,37 +436,41 @@ struct Game248Page {
       Column() {
         // Top bar
         Row() {
-          Button({ type: ButtonType.Circle }) { Text('⏸').fontSize(18).fontColor('#000') }
-          .width(44).height(44).backgroundColor('rgba(0,0,0,0.06)')
+          Button({ type: ButtonType.Circle }) { Text('⏸').fontSize(18).fontColor(TEXT_MAIN) }
+          .width(44).height(44).backgroundColor('rgba(255,255,255,0.82)')
           .onClick(() => { if (!this.showTutorial) { this.clearTimer(); this.isPaused = true; } })
           Blank()
-          Text('248').fontSize(20).fontWeight(FontWeight.Bold).fontColor('#000')
+          Text('248').fontSize(20).fontWeight(FontWeight.Bold).fontColor(TEXT_MAIN)
           Blank()
-          Text(`分数: ${this.totalScore}`).fontSize(16).fontColor('#673AB7').fontWeight(FontWeight.Bold)
+          Text(`分数 ${this.totalScore}`).fontSize(14).fontColor(THEME).fontWeight(FontWeight.Bold)
+            .padding({ left: 12, right: 12, top: 6, bottom: 6 })
+            .backgroundColor('rgba(255,255,255,0.76)')
+            .borderRadius(999)
         }
-        .width('100%').height(56).padding({ left: 12, right: 12 }).alignItems(VerticalAlign.Center)
+        .width('100%').height(64).padding({ left: 14, right: 14 }).alignItems(VerticalAlign.Center)
 
         // Timer bar
         Row() {
           Text(`⏱ ${this.timerText()}`).fontSize(14)
-            .fontColor(this.timeRemainingMs <= 10000 ? '#F44336' : '#424242')
+            .padding({ left: 14, right: 14, top: 6, bottom: 6 })
+            .backgroundColor('rgba(255,255,255,0.76)')
+            .borderRadius(999)
+            .fontColor(this.timeRemainingMs <= 10000 ? DANGER : TEXT_SUB)
             .fontWeight(this.timeRemainingMs <= 10000 ? FontWeight.Bold : FontWeight.Normal)
         }
         .width('100%').padding({ left: 16, right: 16, bottom: 4 }).justifyContent(FlexAlign.End)
 
         Stack({ alignContent: Alignment.Start }) {
-          Row().width('100%').height(5).backgroundColor('#E0E0E0').borderRadius(3)
+          Row().width('100%').height(5).backgroundColor(BORDER_SOFT).borderRadius(3)
           Row().width(`${(this.progressRatio() * 100).toFixed(1)}%`).height(5)
-            .backgroundColor(this.timeRemainingMs > 20000 ? '#4CAF50' : this.timeRemainingMs > 10000 ? '#FF9800' : '#F44336')
+            .backgroundColor(this.timeRemainingMs > 20000 ? SUCCESS : this.timeRemainingMs > 10000 ? '#FFB020' : DANGER)
             .borderRadius(3).animation({ duration: 100, curve: Curve.Linear })
         }.width('100%').padding({ left: 0, right: 0, bottom: 8 })
-
-        Divider().color('#E0E0E0')
 
         // Bonus text
         Text(this.showBonus ? this.bonusText : ' ')
           .fontSize(28).fontWeight(FontWeight.Bold)
-          .fontColor('#4CAF50')
+          .fontColor(SUCCESS)
           .opacity(this.showBonus ? 1.0 : 0.0)
           .animation({ duration: 300, curve: Curve.EaseOut })
           .padding({ top: 4, bottom: 4 })
@@ -479,15 +492,19 @@ struct Game248Page {
             .onTouch((e: TouchEvent) => this.handleTouch(e))
         }
         .width('100%').aspectRatio(1)
-        .padding(8)
+        .padding(12)
+        .backgroundColor(CARD_BG)
+        .borderRadius(24)
+        .shadow({ radius: 14, color: '#14000000', offsetX: 0, offsetY: 6 })
+        .margin({ left: 12, right: 12 })
         .onAreaChange((_: Area, area: Area) => { this.boardW = area.width as number; })
 
         // Help hint
         Text('💡 滑动同色方块连接得分，点击边缘箭头移动行列')
-          .fontSize(12).fontColor('#9E9E9E').textAlign(TextAlign.Center)
+          .fontSize(12).fontColor(TEXT_SUB).textAlign(TextAlign.Center)
           .width('100%').padding({ top: 8, bottom: 8, left: 12, right: 12 })
       }
-      .width('100%').height('100%').backgroundColor('#E5F6FE')
+      .width('100%').height('100%').backgroundColor(PAGE_BG)
 
       G248Pause({
         visible: this.isPaused,

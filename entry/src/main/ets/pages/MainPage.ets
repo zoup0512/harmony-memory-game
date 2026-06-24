@@ -7,6 +7,9 @@ interface GameEntry {
   name: string;
   description: string;
   category: string;
+  icon: string;
+  ability: string;
+  difficulty: string;
 }
 
 interface CategoryEntry {
@@ -25,6 +28,16 @@ const CAT_SPEED = 'SPEED';
 const CAT_PROBLEM = 'PROBLEM_SOLVING';
 const CAT_FLEXIBILITY = 'FLEXIBILITY';
 const CAT_IMAGINATION = 'IMAGINATION';
+
+const UI_BG = '#F3F8FF';
+const UI_CARD = '#FFFFFF';
+const UI_TEXT = '#1F2937';
+const UI_SUB = '#6B7280';
+const UI_BORDER = '#E5E7EB';
+const UI_PRIMARY = '#5B7CFA';
+const UI_SUCCESS = '#36B37E';
+const UI_DANGER = '#EF5B5B';
+const UI_STAR = '#FFC83D';
 
 const CATEGORIES: CategoryEntry[] = [
   { id: CAT_ALL,        name: '全部',   color: '#757575', icon: '◈' },
@@ -76,34 +89,34 @@ function categoryName(cat: string): string {
 
 const ALL_GAMES: GameEntry[] = [
   // Memory (记忆)
-  { id: 1,  name: '记忆网格',   description: '记住网格中的位置',       category: CAT_MEMORY },
-  { id: 2,  name: '六边形',     description: '六边形网格记忆游戏',     category: CAT_MEMORY },
-  { id: 3,  name: '谁是新的',   description: '识别新出现的元素',       category: CAT_MEMORY },
-  { id: 5,  name: '跟随路径',   description: '记住并跟随路径',         category: CAT_MEMORY },
-  { id: 6,  name: '图像漩涡',   description: '图像记忆游戏',           category: CAT_MEMORY },
-  { id: 8,  name: '找图片',     description: '找到之前看过的图片',     category: CAT_MEMORY },
+  { id: 1,  name: '记忆网格',   description: '记住亮起的位置，按顺序找回', category: CAT_MEMORY, icon: '🧠', ability: '空间记忆', difficulty: '入门' },
+  { id: 2,  name: '蜂巢记忆',   description: '在六边形蜂巢里完成空间挑战', category: CAT_MEMORY, icon: '⬡', ability: '空间记忆', difficulty: '挑战' },
+  { id: 3,  name: '谁是新的',   description: '识别新出现的元素',       category: CAT_MEMORY, icon: '✨', ability: '视觉记忆', difficulty: '即将推出' },
+  { id: 5,  name: '跟随路径',   description: '记住并跟随路径',         category: CAT_MEMORY, icon: '〰', ability: '路径记忆', difficulty: '即将推出' },
+  { id: 6,  name: '图像漩涡',   description: '图像记忆游戏',           category: CAT_MEMORY, icon: '🌀', ability: '图像记忆', difficulty: '即将推出' },
+  { id: 8,  name: '找图片',     description: '找到之前看过的图片',     category: CAT_MEMORY, icon: '🖼', ability: '图像识别', difficulty: '即将推出' },
   // Attention (注意力)
-  { id: 4,  name: '旋转网格',   description: '记住网格位置，然后旋转', category: CAT_ATTENTION },
-  { id: 7,  name: '抓住它们',   description: '快速抓住目标',           category: CAT_ATTENTION },
+  { id: 4,  name: '旋转网格',   description: '记住图案并判断旋转后的位置', category: CAT_ATTENTION, icon: '🔄', ability: '空间想象', difficulty: '进阶' },
+  { id: 7,  name: '抓住它们',   description: '快速抓住目标',           category: CAT_ATTENTION, icon: '🎯', ability: '反应注意', difficulty: '即将推出' },
   // Speed (速度)
-  { id: 24, name: '唯一的',     description: '找出唯一不同的元素',     category: CAT_SPEED },
-  { id: 12, name: '全部相同',   description: '判断所有元素是否相同',   category: CAT_SPEED },
-  { id: 13, name: '排序数字',   description: '快速排序数字',           category: CAT_SPEED },
-  { id: 18, name: '找到全部',   description: '找到所有目标',           category: CAT_SPEED },
-  { id: 22, name: '舒尔特表',   description: '按顺序点击数字',         category: CAT_SPEED },
+  { id: 24, name: '唯一的',     description: '找出唯一不同的元素',     category: CAT_SPEED, icon: '◆', ability: '视觉速度', difficulty: '即将推出' },
+  { id: 12, name: '全部相同',   description: '判断所有元素是否相同',   category: CAT_SPEED, icon: '≡', ability: '快速判断', difficulty: '即将推出' },
+  { id: 13, name: '排序数字',   description: '快速排序数字',           category: CAT_SPEED, icon: '🔢', ability: '排序速度', difficulty: '即将推出' },
+  { id: 18, name: '找到全部',   description: '找到所有目标',           category: CAT_SPEED, icon: '🔎', ability: '搜索速度', difficulty: '即将推出' },
+  { id: 22, name: '舒尔特表',   description: '按顺序快速找到数字',     category: CAT_SPEED, icon: '🔢', ability: '专注搜索', difficulty: '速度' },
   // Problem Solving (问题解决)
-  { id: 25, name: '正确吗',     description: '判断数学等式是否正确',   category: CAT_PROBLEM },
-  { id: 11, name: '更多更少',   description: '比较数字大小',           category: CAT_PROBLEM },
-  { id: 16, name: '248',        description: '2048 类游戏',             category: CAT_PROBLEM },
-  { id: 20, name: '对称',       description: '判断对称性',             category: CAT_PROBLEM },
-  { id: 21, name: '激光',       description: '激光反射游戏',           category: CAT_PROBLEM },
+  { id: 25, name: '正确吗',     description: '判断数学等式是否正确',   category: CAT_PROBLEM, icon: '✓', ability: '逻辑判断', difficulty: '即将推出' },
+  { id: 11, name: '更多更少',   description: '比较数字大小',           category: CAT_PROBLEM, icon: '↕', ability: '数量比较', difficulty: '即将推出' },
+  { id: 16, name: '248',        description: '连接同色方块，移动行列创造高分', category: CAT_PROBLEM, icon: '🎨', ability: '策略连接', difficulty: '限时' },
+  { id: 20, name: '对称',       description: '判断对称性',             category: CAT_PROBLEM, icon: '◇', ability: '图形逻辑', difficulty: '即将推出' },
+  { id: 21, name: '激光',       description: '激光反射游戏',           category: CAT_PROBLEM, icon: '🔦', ability: '路径推理', difficulty: '即将推出' },
   // Flexibility (灵活性)
-  { id: 26, name: '颜色',       description: '判断颜色词与文字颜色是否匹配', category: CAT_FLEXIBILITY },
-  { id: 14, name: '纸飞机',     description: '纸飞机方向游戏',         category: CAT_FLEXIBILITY },
-  { id: 15, name: '像之前的吗', description: '判断是否与之前相同',     category: CAT_FLEXIBILITY },
+  { id: 26, name: '颜色',       description: '判断颜色词与文字颜色是否匹配', category: CAT_FLEXIBILITY, icon: '🌈', ability: '认知灵活', difficulty: '即将推出' },
+  { id: 14, name: '纸飞机',     description: '纸飞机方向游戏',         category: CAT_FLEXIBILITY, icon: '✈', ability: '方向切换', difficulty: '即将推出' },
+  { id: 15, name: '像之前的吗', description: '判断是否与之前相同',     category: CAT_FLEXIBILITY, icon: '↩', ability: '工作记忆', difficulty: '即将推出' },
   // Imagination (想象力)
-  { id: 19, name: '数一数',     description: '数数游戏',               category: CAT_IMAGINATION },
-  { id: 17, name: '金字塔',     description: '金字塔游戏',             category: CAT_IMAGINATION },
+  { id: 19, name: '数一数',     description: '数数游戏',               category: CAT_IMAGINATION, icon: '🧮', ability: '数量想象', difficulty: '即将推出' },
+  { id: 17, name: '金字塔',     description: '金字塔游戏',             category: CAT_IMAGINATION, icon: '🔺', ability: '空间结构', difficulty: '即将推出' },
 ];
 
 function filteredGames(selectedCat: string): GameEntry[] {
@@ -130,14 +143,12 @@ struct CategoryChip {
     Text(this.label)
       .fontSize(13)
       .fontColor(this.selected ? '#FFFFFF' : this.color)
-      .fontWeight(this.selected ? FontWeight.Bold : FontWeight.Normal)
-      .padding({ left: 14, right: 14, top: 7, bottom: 7 })
-      .backgroundColor(this.selected ? this.color : '#F5F5F5')
-      .borderRadius(20)
-      .border({
-        width: 1.5,
-        color: this.selected ? this.color : '#E0E0E0'
-      })
+      .fontWeight(FontWeight.Bold)
+      .padding({ left: 16, right: 16, top: 8, bottom: 8 })
+      .backgroundColor(this.selected ? this.color : UI_CARD)
+      .borderRadius(999)
+      .border({ width: 1, color: this.selected ? this.color : UI_BORDER })
+      .shadow({ radius: this.selected ? 8 : 2, color: this.selected ? '#22000000' : '#0A000000', offsetX: 0, offsetY: 2 })
       .onClick(() => this.onSelect())
   }
 }
@@ -150,6 +161,9 @@ struct GameCard {
   @Prop gameName: string = '';
   @Prop gameDesc: string = '';
   @Prop category: string = '';
+  @Prop icon: string = '';
+  @Prop ability: string = '';
+  @Prop difficulty: string = '';
   onPlay: () => void = () => {};
 
   private isAvailable(): boolean {
@@ -157,68 +171,74 @@ struct GameCard {
   }
 
   build() {
-    Row({ space: 0 }) {
-      // ── Colored icon box ─────────────────────────────
-      Stack() {
-        Column()
-          .width(56)
-          .height(56)
-          .backgroundColor(categoryColor(this.category))
-          .borderRadius(12)
-
-        Text(categoryIcon(this.category))
-          .fontSize(26)
-      }
-      .width(56)
-      .height(56)
-      .margin({ right: 16 })
-
-      // ── Game info ────────────────────────────────────
-      Column({ space: 3 }) {
-        Text(this.gameName)
-          .fontSize(16)
-          .fontWeight(FontWeight.Bold)
-          .fontColor(this.isAvailable() ? '#212121' : '#9E9E9E')
-          .maxLines(1)
-
-        Text(this.gameDesc)
-          .fontSize(12)
-          .fontColor('#757575')
-          .maxLines(2)
-
-        Text(categoryName(this.category))
-          .fontSize(11)
-          .fontColor(categoryColor(this.category))
-          .fontWeight(FontWeight.Medium)
-      }
-      .alignItems(HorizontalAlign.Start)
-      .layoutWeight(1)
-
-      // ── Play / lock indicator ─────────────────────────
-      if (this.isAvailable()) {
-        Text('▶')
-          .fontSize(22)
-          .fontColor('#2196F3')
-          .margin({ left: 8 })
-          .onClick(() => this.onPlay())
-      } else {
-        Column({ space: 2 }) {
-          Text('🔒')
-            .fontSize(20)
-            .fontColor('#BDBDBD')
-          Text('即将推出')
-            .fontSize(10)
-            .fontColor('#BDBDBD')
+    Stack() {
+      Row({ space: 14 }) {
+        Stack() {
+          Column()
+            .width(64)
+            .height(64)
+            .backgroundColor(categoryColor(this.category))
+            .borderRadius(20)
+            .opacity(this.isAvailable() ? 1.0 : 0.35)
+          Text(this.icon)
+            .fontSize(30)
         }
-        .alignItems(HorizontalAlign.Center)
-        .margin({ left: 8 })
+        .width(64)
+        .height(64)
+
+        Column({ space: 8 }) {
+          Row() {
+            Text(this.gameName)
+              .fontSize(18)
+              .fontWeight(FontWeight.Bold)
+              .fontColor(this.isAvailable() ? UI_TEXT : '#9CA3AF')
+              .layoutWeight(1)
+              .maxLines(1)
+            Text(this.isAvailable() ? '开始' : '锁定')
+              .fontSize(12)
+              .fontColor(this.isAvailable() ? '#FFFFFF' : '#9CA3AF')
+              .fontWeight(FontWeight.Bold)
+              .padding({ left: 12, right: 12, top: 5, bottom: 5 })
+              .backgroundColor(this.isAvailable() ? categoryColor(this.category) : '#F3F4F6')
+              .borderRadius(999)
+          }
+          .width('100%')
+          .alignItems(VerticalAlign.Center)
+
+          Text(this.gameDesc)
+            .fontSize(13)
+            .fontColor(UI_SUB)
+            .lineHeight(18)
+            .maxLines(2)
+
+          Row({ space: 8 }) {
+            Text(this.ability)
+              .fontSize(11)
+              .fontColor(categoryColor(this.category))
+              .fontWeight(FontWeight.Bold)
+              .padding({ left: 10, right: 10, top: 4, bottom: 4 })
+              .backgroundColor('#F8FAFC')
+              .borderRadius(999)
+            Text(this.difficulty)
+              .fontSize(11)
+              .fontColor(UI_SUB)
+              .fontWeight(FontWeight.Medium)
+              .padding({ left: 10, right: 10, top: 4, bottom: 4 })
+              .backgroundColor('#F8FAFC')
+              .borderRadius(999)
+          }
+        }
+        .layoutWeight(1)
+        .alignItems(HorizontalAlign.Start)
       }
+      .width('100%')
+      .padding(16)
     }
     .width('100%')
-    .padding(16)
-    .backgroundColor('#FFFFFF')
-    .borderRadius(12)
-    .shadow({ radius: 4, color: '#14000000', offsetX: 0, offsetY: 2 })
+    .backgroundColor(UI_CARD)
+    .borderRadius(24)
+    .shadow({ radius: 14, color: '#14000000', offsetX: 0, offsetY: 6 })
+    .opacity(this.isAvailable() ? 1.0 : 0.72)
     .onClick(() => {
       if (this.isAvailable()) {
         this.onPlay();
@@ -237,22 +257,57 @@ struct SprintTab {
 
   build() {
     Column() {
-      // ── Header ──────────────────────────────────────
-      Column({ space: 4 }) {
-        Text('Sprint 模式')
-          .fontSize(22)
-          .fontWeight(FontWeight.Bold)
-          .fontColor('#212121')
-
-        Text('选择一个游戏快速开始')
-          .fontSize(14)
-          .fontColor('#757575')
+      Column({ space: 12 }) {
+        Stack() {
+          Column()
+            .width('100%')
+            .height(150)
+            .backgroundColor(UI_PRIMARY)
+            .borderRadius(28)
+          Row() {
+            Column({ space: 8 }) {
+              Text('今天训练了吗？')
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .fontColor('#FFFFFF')
+              Text('选择一个小游戏，开始 3 分钟专注挑战')
+                .fontSize(14)
+                .fontColor('#EAF0FF')
+                .lineHeight(20)
+                .maxLines(2)
+              Row({ space: 8 }) {
+                Text('5 个可玩')
+                  .fontSize(12)
+                  .fontColor(UI_PRIMARY)
+                  .fontWeight(FontWeight.Bold)
+                  .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+                  .backgroundColor('#FFFFFF')
+                  .borderRadius(999)
+                Text('快速训练')
+                  .fontSize(12)
+                  .fontColor('#FFFFFF')
+                  .fontWeight(FontWeight.Bold)
+                  .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+                  .backgroundColor('rgba(255,255,255,0.22)')
+                  .borderRadius(999)
+              }
+            }
+            .layoutWeight(1)
+            .alignItems(HorizontalAlign.Start)
+            Text('⚡')
+              .fontSize(54)
+          }
+          .padding(20)
+          .width('100%')
+          .height(150)
+          .alignItems(VerticalAlign.Center)
+        }
+        .width('100%')
+        .shadow({ radius: 16, color: '#245B7CFA', offsetX: 0, offsetY: 8 })
       }
       .width('100%')
-      .alignItems(HorizontalAlign.Start)
       .padding({ left: 16, right: 16, top: 16, bottom: 12 })
 
-      // ── Category filter row ─────────────────────────
       Scroll(this.catScroller) {
         Row({ space: 8 }) {
           ForEach(
@@ -270,14 +325,13 @@ struct SprintTab {
             (cat: CategoryEntry) => cat.id
           )
         }
-        .padding({ left: 16, right: 16 })
+        .padding({ left: 16, right: 16, top: 2, bottom: 4 })
       }
       .scrollable(ScrollDirection.Horizontal)
       .scrollBar(BarState.Off)
       .width('100%')
 
-      // ── Game list ───────────────────────────────────
-      List({ space: 10, scroller: this.listScroller }) {
+      List({ space: 14, scroller: this.listScroller }) {
         ForEach(
           filteredGames(this.selectedCat),
           (game: GameEntry) => {
@@ -287,6 +341,9 @@ struct SprintTab {
                 gameName: game.name,
                 gameDesc: game.description,
                 category: game.category,
+                icon: game.icon,
+                ability: game.ability,
+                difficulty: game.difficulty,
                 onPlay: () => {
                   if (game.id === 4) {
                     router.pushUrl({ url: 'pages/RotatingGridPage' });
@@ -306,7 +363,7 @@ struct SprintTab {
           },
           (game: GameEntry) => game.id.toString()
         )
-        ListItem().height(16)
+        ListItem().height(20)
       }
       .layoutWeight(1)
       .width('100%')
@@ -315,6 +372,7 @@ struct SprintTab {
     }
     .width('100%')
     .height('100%')
+    .backgroundColor(UI_BG)
   }
 }
 
@@ -328,19 +386,20 @@ struct PlaceholderTab {
   build() {
     Column({ space: 16 }) {
       Text(this.icon)
-        .fontSize(52)
+        .fontSize(56)
       Text(this.title)
-        .fontSize(20)
+        .fontSize(22)
         .fontWeight(FontWeight.Bold)
-        .fontColor('#424242')
+        .fontColor(UI_TEXT)
       Text('功能开发中')
         .fontSize(14)
-        .fontColor('#9E9E9E')
+        .fontColor(UI_SUB)
     }
     .width('100%')
     .height('100%')
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
+    .backgroundColor(UI_BG)
   }
 }
 
@@ -361,37 +420,51 @@ struct MainPage {
     Column() {
       // ── Top bar ───────────────────────────────────────
       Row() {
-        Text('Memory Games')
-          .fontSize(20)
-          .fontWeight(FontWeight.Bold)
-          .fontColor('#212121')
-          .layoutWeight(1)
+        Column({ space: 2 }) {
+          Text('Memory Games')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(UI_TEXT)
+          Text('脑力训练大厅')
+            .fontSize(12)
+            .fontColor(UI_SUB)
+        }
+        .alignItems(HorizontalAlign.Start)
+        .layoutWeight(1)
 
-        // Stars
         Row({ space: 4 }) {
           Text('★')
             .fontSize(18)
-            .fontColor('#FFC107')
+            .fontColor(UI_STAR)
           Text(this.stars.toString())
-            .fontSize(16)
-            .fontColor('#212121')
+            .fontSize(15)
+            .fontColor(UI_TEXT)
+            .fontWeight(FontWeight.Bold)
         }
-        .margin({ right: 16 })
+        .height(32)
+        .padding({ left: 12, right: 12 })
+        .backgroundColor('#FFF8E1')
+        .borderRadius(999)
+        .margin({ right: 8 })
 
-        // Coins
         Row({ space: 4 }) {
           Text('💰')
-            .fontSize(18)
-          Text(this.coins.toString())
             .fontSize(16)
-            .fontColor('#212121')
+          Text(this.coins.toString())
+            .fontSize(15)
+            .fontColor(UI_TEXT)
+            .fontWeight(FontWeight.Bold)
         }
+        .height(32)
+        .padding({ left: 12, right: 12 })
+        .backgroundColor('#ECFDF5')
+        .borderRadius(999)
       }
       .width('100%')
-      .height(56)
+      .height(64)
       .padding({ left: 16, right: 16 })
-      .backgroundColor('#FFFFFF')
-      .shadow({ radius: 2, color: '#14000000', offsetX: 0, offsetY: 2 })
+      .backgroundColor(UI_CARD)
+      .shadow({ radius: 8, color: '#10000000', offsetX: 0, offsetY: 3 })
       .alignItems(VerticalAlign.Center)
 
       // ── Tab content ───────────────────────────────────
@@ -410,7 +483,7 @@ struct MainPage {
       }
       .layoutWeight(1)
       .width('100%')
-      .backgroundColor('#F5F5F5')
+      .backgroundColor(UI_BG)
 
       // ── Bottom navigation bar ─────────────────────────
       Row() {
@@ -420,17 +493,20 @@ struct MainPage {
             Column({ space: 3 }) {
               Text(this.tabIcons[idx])
                 .fontSize(this.selectedTab === idx ? 22 : 20)
-                .fontColor(this.selectedTab === idx ? '#2196F3' : '#9E9E9E')
+                .fontColor(this.selectedTab === idx ? UI_PRIMARY : '#9CA3AF')
 
               Text(this.tabLabels[idx])
                 .fontSize(11)
-                .fontColor(this.selectedTab === idx ? '#2196F3' : '#9E9E9E')
+                .fontColor(this.selectedTab === idx ? UI_PRIMARY : '#9CA3AF')
                 .fontWeight(this.selectedTab === idx ? FontWeight.Bold : FontWeight.Normal)
             }
             .layoutWeight(1)
-            .height('100%')
+            .height(50)
             .justifyContent(FlexAlign.Center)
             .alignItems(HorizontalAlign.Center)
+            .backgroundColor(this.selectedTab === idx ? '#EEF2FF' : 'transparent')
+            .borderRadius(18)
+            .margin({ left: 4, right: 4 })
             .onClick(() => {
               this.selectedTab = idx;
             })
@@ -439,12 +515,13 @@ struct MainPage {
         )
       }
       .width('100%')
-      .height(60)
-      .backgroundColor('#FFFFFF')
-      .border({ width: { top: 1 }, color: '#E0E0E0' })
+      .height(68)
+      .padding({ left: 8, right: 8, top: 6, bottom: 8 })
+      .backgroundColor(UI_CARD)
+      .shadow({ radius: 12, color: '#14000000', offsetX: 0, offsetY: -4 })
     }
     .width('100%')
     .height('100%')
-    .backgroundColor('#F5F5F5')
+    .backgroundColor(UI_BG)
   }
 }

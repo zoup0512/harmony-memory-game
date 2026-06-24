@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "./sign/debug/debug.cer",
+          "certpath": "C:\\Users\\vyron\\.ohos\\config\\default_harmony-memory-game_y9X2tRsnmXf3Cd-ZGXTs5UV55sTguwgREqkPx-IamAk=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B8A44A43059D509CE26E676F20A7F81093408ECACA1CAE18CD15E126C60559A646D04838992F934",
-          "profile": "./sign/debug/debug.p7b",
+          "keyPassword": "0000001BCFF9021B9F82CD596291C572C4541B5382ED6E0C72A50F7191AD540127C40241FADE1361CAA49A",
+          "profile": "C:\\Users\\vyron\\.ohos\\config\\default_harmony-memory-game_y9X2tRsnmXf3Cd-ZGXTs5UV55sTguwgREqkPx-IamAk=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "./sign/debug/debug.p12",
-          "storePassword": "0000001B50DD5AD59D5619C2B6000195A46A0F901A333AC786E85250C15EB5DD3A2FB6B64E69DF731167DA"
+          "storeFile": "C:\\Users\\vyron\\.ohos\\config\\default_harmony-memory-game_y9X2tRsnmXf3Cd-ZGXTs5UV55sTguwgREqkPx-IamAk=.p12",
+          "storePassword": "0000001B1D9113F16FF4766E1C5F04344B4918C5118C5A1D290EEBC61EF15298EF8A1364FFF78C3CADA158"
         }
       }
     ],

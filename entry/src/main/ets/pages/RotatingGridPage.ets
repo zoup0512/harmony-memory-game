@@ -1,5 +1,14 @@
 import { router } from '@kit.ArkUI';
 
+const PAGE_BG = '#F3F8FF';
+const CARD_BG = '#FFFFFF';
+const TEXT_MAIN = '#1F2937';
+const TEXT_SUB = '#6B7280';
+const BORDER_SOFT = '#E5E7EB';
+const THEME = '#7C5CFF';
+const DANGER = '#EF5B5B';
+const SUCCESS = '#36B37E';
+
 // ─── Helpers (ArkTS-safe) ──────────────────────────────────────────────────────
 
 function makeRange(n: number): number[] {
@@ -119,15 +128,15 @@ function arraysMatch(a: number[], b: number[]): boolean {
 
 function rgStateColor(state: string): string {
   switch (state) {
-    case RG_READY: return '#4CAF50';
-    case RG_GRID_ANIM: return '#2196F3';
-    case RG_SHOW_CHALLENGE: return '#FFC107';
-    case RG_ROTATING: return '#009688';
-    case RG_PLAYER_TURN: return '#4CAF50';
-    case RG_LEVEL_COMPLETE: return '#4CAF50';
-    case RG_SHOW_FAILURE: return '#F44336';
-    case RG_GAME_OVER: return '#F44336';
-    default: return '#9E9E9E';
+    case RG_READY: return SUCCESS;
+    case RG_GRID_ANIM: return THEME;
+    case RG_SHOW_CHALLENGE: return '#FFB020';
+    case RG_ROTATING: return '#00A896';
+    case RG_PLAYER_TURN: return SUCCESS;
+    case RG_LEVEL_COMPLETE: return SUCCESS;
+    case RG_SHOW_FAILURE: return DANGER;
+    case RG_GAME_OVER: return DANGER;
+    default: return TEXT_SUB;
   }
 }
 
@@ -156,11 +165,11 @@ struct RGCell {
   onCellClick: (idx: number) => void = () => {};
 
   private cellBg(): string {
-    if (this.gameState === RG_LEVEL_COMPLETE && this.isInPattern) return '#4CAF50';
-    if (this.gameState === RG_SHOW_FAILURE && this.isInPattern) return '#F44336';
-    if (this.gameState === RG_SHOW_CHALLENGE && this.isInPattern) return '#009688';
-    if (this.gameState === RG_PLAYER_TURN && this.isSelected) return '#2196F3';
-    return '#E0E0E0';
+    if (this.gameState === RG_LEVEL_COMPLETE && this.isInPattern) return SUCCESS;
+    if (this.gameState === RG_SHOW_FAILURE && this.isInPattern) return DANGER;
+    if (this.gameState === RG_SHOW_CHALLENGE && this.isInPattern) return '#00A896';
+    if (this.gameState === RG_PLAYER_TURN && this.isSelected) return THEME;
+    return '#E5E7EB';
   }
 
   private cellIcon(): string {
@@ -245,7 +254,10 @@ struct RotatingGridView {
     .rowsGap(7)
     .width('100%')
     .aspectRatio(1)
-    .padding(4)
+    .padding(12)
+    .backgroundColor(CARD_BG)
+    .borderRadius(24)
+    .shadow({ radius: 14, color: '#14000000', offsetX: 0, offsetY: 6 })
     .rotate({ angle: this.displayAngle })
     .animation({ duration: this.animDuration, curve: Curve.FastOutSlowIn })
   }
@@ -266,19 +278,19 @@ struct RGPauseDialog {
         Column()
           .width('100%')
           .height('100%')
-          .backgroundColor('rgba(0,0,0,0.5)')
+          .backgroundColor('rgba(15,23,42,0.45)')
 
         Column({ space: 14 }) {
           Text('游戏暂停')
             .fontSize(22)
             .fontWeight(FontWeight.Bold)
-            .fontColor('#000000')
+            .fontColor(TEXT_MAIN)
 
           Text('旋转网格')
             .fontSize(14)
-            .fontColor('#757575')
+            .fontColor(TEXT_SUB)
 
-          Divider().color('#E0E0E0')
+          Divider().color(BORDER_SOFT)
 
           Button({ type: ButtonType.Normal }) {
             Row({ space: 8 }) {
@@ -286,7 +298,7 @@ struct RGPauseDialog {
               Text('继续游戏').fontSize(16).fontColor('#FFFFFF')
             }.justifyContent(FlexAlign.Center)
           }
-          .width('100%').height(52).backgroundColor('#4CAF50').borderRadius(10)
+          .width('100%').height(52).backgroundColor(SUCCESS).borderRadius(10)
           .onClick(() => this.onResume())
 
           Button({ type: ButtonType.Normal }) {
@@ -295,7 +307,7 @@ struct RGPauseDialog {
               Text('重新开始').fontSize(16).fontColor('#FFFFFF')
             }.justifyContent(FlexAlign.Center)
           }
-          .width('100%').height(52).backgroundColor('#2196F3').borderRadius(10)
+          .width('100%').height(52).backgroundColor(THEME).borderRadius(10)
           .onClick(() => this.onRestart())
 
           Button({ type: ButtonType.Normal }) {
@@ -304,13 +316,13 @@ struct RGPauseDialog {
               Text('退出游戏').fontSize(16).fontColor('#FFFFFF')
             }.justifyContent(FlexAlign.Center)
           }
-          .width('100%').height(52).backgroundColor('#F44336').borderRadius(10)
+          .width('100%').height(52).backgroundColor(DANGER).borderRadius(10)
           .onClick(() => this.onExit())
         }
         .padding(24)
-        .backgroundColor('#FFFFFF')
-        .borderRadius(16)
-        .shadow({ radius: 16, color: '#3A000000', offsetX: 0, offsetY: 8 })
+        .backgroundColor(CARD_BG)
+        .borderRadius(24)
+        .shadow({ radius: 24, color: '#26000000', offsetX: 0, offsetY: 10 })
         .width('85%')
         .alignItems(HorizontalAlign.Center)
       }
@@ -339,52 +351,52 @@ struct RGGameOverOverlay {
         Column()
           .width('100%')
           .height('100%')
-          .backgroundColor('rgba(0,0,0,0.6)')
+          .backgroundColor('rgba(15,23,42,0.50)')
 
         Column({ space: 18 }) {
           Text('游戏结束')
             .fontSize(30)
             .fontWeight(FontWeight.Bold)
-            .fontColor('#000000')
+            .fontColor(TEXT_MAIN)
 
           Row({ space: 6 }) {
             Text(this.stars >= 1 ? '★' : '☆').fontSize(38)
-              .fontColor(this.stars >= 1 ? '#FFC107' : '#BDBDBD')
+              .fontColor(this.stars >= 1 ? '#FFC83D' : '#CBD5E1')
             Text(this.stars >= 2 ? '★' : '☆').fontSize(38)
-              .fontColor(this.stars >= 2 ? '#FFC107' : '#BDBDBD')
+              .fontColor(this.stars >= 2 ? '#FFC83D' : '#CBD5E1')
             Text(this.stars >= 3 ? '★' : '☆').fontSize(38)
-              .fontColor(this.stars >= 3 ? '#FFC107' : '#BDBDBD')
+              .fontColor(this.stars >= 3 ? '#FFC83D' : '#CBD5E1')
           }
 
           Column({ space: 8 }) {
             Row({ space: 6 }) {
-              Text('最终得分：').fontSize(16).fontColor('#424242')
+              Text('最终得分：').fontSize(16).fontColor(TEXT_SUB)
               Text(this.score.toString()).fontSize(22).fontWeight(FontWeight.Bold)
-                .fontColor('#2196F3')
+                .fontColor(THEME)
             }
             Row({ space: 6 }) {
-              Text('到达关卡：').fontSize(16).fontColor('#424242')
+              Text('到达关卡：').fontSize(16).fontColor(TEXT_SUB)
               Text(this.level.toString()).fontSize(22).fontWeight(FontWeight.Bold)
-                .fontColor('#4CAF50')
+                .fontColor(SUCCESS)
             }
           }
 
           Button({ type: ButtonType.Normal }) {
             Text('再玩一次').fontSize(18).fontWeight(FontWeight.Bold).fontColor('#FFFFFF')
           }
-          .width('100%').height(56).backgroundColor('#4CAF50').borderRadius(12)
+          .width('100%').height(56).backgroundColor(SUCCESS).borderRadius(12)
           .onClick(() => this.onPlayAgain())
 
           Button({ type: ButtonType.Normal }) {
             Text('退出游戏').fontSize(16).fontColor('#FFFFFF')
           }
-          .width('100%').height(48).backgroundColor('#F44336').borderRadius(12)
+          .width('100%').height(48).backgroundColor(DANGER).borderRadius(12)
           .onClick(() => this.onExit())
         }
         .padding(28)
-        .backgroundColor('#FFFFFF')
-        .borderRadius(20)
-        .shadow({ radius: 20, color: '#3A000000', offsetX: 0, offsetY: 8 })
+        .backgroundColor(CARD_BG)
+        .borderRadius(24)
+        .shadow({ radius: 24, color: '#26000000', offsetX: 0, offsetY: 10 })
         .width('85%')
         .alignItems(HorizontalAlign.Center)
       }
@@ -634,16 +646,16 @@ struct RotatingGridPage {
         // ── Top bar ────────────────────────────────────
         Row() {
           Button({ type: ButtonType.Circle }) {
-            Text('⏸').fontSize(18).fontColor('#000000')
+            Text('⏸').fontSize(18).fontColor(TEXT_MAIN)
           }
           .width(44).height(44)
-          .backgroundColor('rgba(0,0,0,0.06)')
+          .backgroundColor('rgba(255,255,255,0.82)')
           .onClick(() => this.pauseGame())
 
           Blank()
 
           Text('旋转网格')
-            .fontSize(18).fontColor('#000000').fontWeight(FontWeight.Normal)
+            .fontSize(19).fontColor(TEXT_MAIN).fontWeight(FontWeight.Bold)
 
           Blank()
 
@@ -653,30 +665,34 @@ struct RotatingGridPage {
               (i: number) => {
                 Text(i < this.lives ? '❤' : '♡')
                   .fontSize(20)
-                  .fontColor(i < this.lives ? '#F44336' : '#BDBDBD')
+                  .fontColor(i < this.lives ? DANGER : '#CBD5E1')
               },
               (i: number) => `life_${i}`
             )
           }
         }
-        .width('100%').height(56)
-        .padding({ left: 12, right: 12 })
+        .width('100%').height(64)
+        .padding({ left: 14, right: 14 })
         .alignItems(VerticalAlign.Center)
 
         // ── Level + timer bar ──────────────────────────
         Row() {
           Text(`关卡 ${this.level}`)
-            .fontSize(14).fontColor('#424242')
+            .fontSize(14).fontColor(TEXT_SUB).fontWeight(FontWeight.Bold)
+            .padding({ left: 14, right: 14, top: 6, bottom: 6 })
+            .backgroundColor('rgba(255,255,255,0.76)')
+            .borderRadius(999)
           Blank()
           Text(`⏱ ${this.timerText()}`)
             .fontSize(14)
-            .fontColor(this.timeRemaining <= 10 ? '#F44336' : '#424242')
+            .padding({ left: 14, right: 14, top: 6, bottom: 6 })
+            .backgroundColor('rgba(255,255,255,0.76)')
+            .borderRadius(999)
+            .fontColor(this.timeRemaining <= 10 ? DANGER : TEXT_SUB)
             .fontWeight(this.timeRemaining <= 10 ? FontWeight.Bold : FontWeight.Normal)
         }
         .width('100%')
         .padding({ left: 16, right: 16, top: 2, bottom: 4 })
-
-        Divider().color('#E0E0E0').strokeWidth(1)
 
         // ── Game content ───────────────────────────────
         Stack() {
@@ -690,8 +706,8 @@ struct RotatingGridPage {
               .width('100%')
               .padding({ top: 12, bottom: 12, left: 16, right: 16 })
               .backgroundColor(this.tintBg(rgStateColor(this.gameState)))
-              .borderRadius(14)
-              .shadow({ radius: 3, color: '#12000000', offsetX: 0, offsetY: 2 })
+              .borderRadius(18)
+              .shadow({ radius: 8, color: '#12000000', offsetX: 0, offsetY: 3 })
               .scale({
                 x: (this.gameState === RG_LEVEL_COMPLETE ||
                     this.gameState === RG_SHOW_FAILURE) ? 1.06 : 1.0,
@@ -732,14 +748,14 @@ struct RotatingGridPage {
           .height('100%')
           .justifyContent(FlexAlign.Center)
           .alignItems(HorizontalAlign.Center)
-          .padding({ top: 16, bottom: 16, left: 16, right: 16 })
+          .padding({ top: 18, bottom: 18, left: 18, right: 18 })
 
           // Ready timer overlay
           if (this.showReadyTimer) {
             Stack() {
               Column()
                 .width('100%').height('100%')
-                .backgroundColor('rgba(229,246,254,0.85)')
+                .backgroundColor('rgba(243,248,255,0.92)')
 
               Column({ space: 16 }) {
                 Stack() {
@@ -748,12 +764,12 @@ struct RotatingGridPage {
                     .fill('#FFFFFF')
                     .shadow({ radius: 6, color: '#22000000', offsetX: 0, offsetY: 3 })
                   Text(this.readyTimerSec > 0 ? this.readyTimerSec.toString() : '✓')
-                    .fontSize(48).fontWeight(FontWeight.Bold).fontColor('#4CAF50')
+                    .fontSize(48).fontWeight(FontWeight.Bold).fontColor(SUCCESS)
                 }
                 .width(110).height(110)
 
                 Text('准备好！')
-                  .fontSize(22).fontWeight(FontWeight.Bold).fontColor('#4CAF50')
+                  .fontSize(22).fontWeight(FontWeight.Bold).fontColor(SUCCESS)
               }
               .justifyContent(FlexAlign.Center)
               .alignItems(HorizontalAlign.Center)
@@ -765,7 +781,7 @@ struct RotatingGridPage {
         .width('100%')
       }
       .width('100%').height('100%')
-      .backgroundColor('#E5F6FE')
+      .backgroundColor(PAGE_BG)
 
       // ── Pause dialog ──────────────────────────────────
       RGPauseDialog({

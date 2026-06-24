@@ -1,5 +1,14 @@
 import { router } from '@kit.ArkUI';
 
+const PAGE_BG = '#F3F8FF';
+const CARD_BG = '#FFFFFF';
+const TEXT_MAIN = '#1F2937';
+const TEXT_SUB = '#6B7280';
+const BORDER_SOFT = '#E5E7EB';
+const THEME = '#26C6DA';
+const DANGER = '#EF5B5B';
+const SUCCESS = '#36B37E';
+
 // ─── Progression (GameProgression1) ────────────────────────────────────────────
 
 function hexGridSize(level: number): number {
@@ -85,23 +94,23 @@ struct HexPause {
   build() {
     if (this.visible) {
       Stack() {
-        Column().width('100%').height('100%').backgroundColor('rgba(0,0,0,0.5)')
+        Column().width('100%').height('100%').backgroundColor('rgba(15,23,42,0.45)')
         Column({ space: 14 }) {
-          Text('游戏暂停').fontSize(22).fontWeight(FontWeight.Bold)
-          Text('六边形').fontSize(14).fontColor('#757575')
-          Divider().color('#E0E0E0')
+          Text('游戏暂停').fontSize(22).fontWeight(FontWeight.Bold).fontColor(TEXT_MAIN)
+          Text('蜂巢记忆').fontSize(14).fontColor(TEXT_SUB)
+          Divider().color(BORDER_SOFT)
           Button({ type: ButtonType.Normal }) {
             Row({ space: 8 }) { Text('▶').fontColor('#FFF'); Text('继续游戏').fontColor('#FFF') }.justifyContent(FlexAlign.Center)
-          }.width('100%').height(52).backgroundColor('#4CAF50').borderRadius(10).onClick(() => this.onResume())
+          }.width('100%').height(52).backgroundColor(SUCCESS).borderRadius(12).onClick(() => this.onResume())
           Button({ type: ButtonType.Normal }) {
             Row({ space: 8 }) { Text('↺').fontColor('#FFF'); Text('重新开始').fontColor('#FFF') }.justifyContent(FlexAlign.Center)
-          }.width('100%').height(52).backgroundColor('#2196F3').borderRadius(10).onClick(() => this.onRestart())
+          }.width('100%').height(52).backgroundColor(THEME).borderRadius(12).onClick(() => this.onRestart())
           Button({ type: ButtonType.Normal }) {
             Row({ space: 8 }) { Text('✕').fontColor('#FFF'); Text('退出游戏').fontColor('#FFF') }.justifyContent(FlexAlign.Center)
-          }.width('100%').height(52).backgroundColor('#F44336').borderRadius(10).onClick(() => this.onExit())
+          }.width('100%').height(52).backgroundColor(DANGER).borderRadius(12).onClick(() => this.onExit())
         }
-        .padding(24).backgroundColor('#FFF').borderRadius(16)
-        .shadow({ radius: 16, color: '#3A000000', offsetX: 0, offsetY: 8 })
+        .padding(24).backgroundColor(CARD_BG).borderRadius(24)
+        .shadow({ radius: 24, color: '#26000000', offsetX: 0, offsetY: 10 })
         .width('85%').alignItems(HorizontalAlign.Center)
       }.width('100%').height('100%').position({ x: 0, y: 0 }).zIndex(100)
     }
@@ -121,33 +130,33 @@ struct HexGameOver {
   build() {
     if (this.visible) {
       Stack() {
-        Column().width('100%').height('100%').backgroundColor('rgba(0,0,0,0.6)')
+        Column().width('100%').height('100%').backgroundColor('rgba(15,23,42,0.50)')
         Column({ space: 18 }) {
-          Text('游戏结束').fontSize(30).fontWeight(FontWeight.Bold)
+          Text('游戏结束').fontSize(30).fontWeight(FontWeight.Bold).fontColor(TEXT_MAIN)
           Row({ space: 6 }) {
-            Text(this.stars >= 1 ? '★' : '☆').fontSize(38).fontColor(this.stars >= 1 ? '#FFC107' : '#BDBDBD')
-            Text(this.stars >= 2 ? '★' : '☆').fontSize(38).fontColor(this.stars >= 2 ? '#FFC107' : '#BDBDBD')
-            Text(this.stars >= 3 ? '★' : '☆').fontSize(38).fontColor(this.stars >= 3 ? '#FFC107' : '#BDBDBD')
+            Text(this.stars >= 1 ? '★' : '☆').fontSize(38).fontColor(this.stars >= 1 ? '#FFC83D' : '#CBD5E1')
+            Text(this.stars >= 2 ? '★' : '☆').fontSize(38).fontColor(this.stars >= 2 ? '#FFC83D' : '#CBD5E1')
+            Text(this.stars >= 3 ? '★' : '☆').fontSize(38).fontColor(this.stars >= 3 ? '#FFC83D' : '#CBD5E1')
           }
           Column({ space: 8 }) {
             Row({ space: 6 }) {
-              Text('最终得分：').fontSize(16).fontColor('#424242')
-              Text(this.score.toString()).fontSize(22).fontWeight(FontWeight.Bold).fontColor('#673AB7')
+              Text('最终得分：').fontSize(16).fontColor(TEXT_SUB)
+              Text(this.score.toString()).fontSize(22).fontWeight(FontWeight.Bold).fontColor(THEME)
             }
             Row({ space: 6 }) {
-              Text('到达关卡：').fontSize(16).fontColor('#424242')
-              Text(this.level.toString()).fontSize(22).fontWeight(FontWeight.Bold).fontColor('#4CAF50')
+              Text('到达关卡：').fontSize(16).fontColor(TEXT_SUB)
+              Text(this.level.toString()).fontSize(22).fontWeight(FontWeight.Bold).fontColor(SUCCESS)
             }
           }
           Button({ type: ButtonType.Normal }) {
             Text('再玩一次').fontSize(18).fontWeight(FontWeight.Bold).fontColor('#FFFFFF')
-          }.width('100%').height(56).backgroundColor('#4CAF50').borderRadius(12).onClick(() => this.onPlayAgain())
+          }.width('100%').height(56).backgroundColor(SUCCESS).borderRadius(12).onClick(() => this.onPlayAgain())
           Button({ type: ButtonType.Normal }) {
             Text('退出游戏').fontSize(16).fontColor('#FFFFFF')
-          }.width('100%').height(48).backgroundColor('#F44336').borderRadius(12).onClick(() => this.onExit())
+          }.width('100%').height(48).backgroundColor(DANGER).borderRadius(12).onClick(() => this.onExit())
         }
-        .padding(28).backgroundColor('#FFF').borderRadius(20)
-        .shadow({ radius: 20, color: '#3A000000', offsetX: 0, offsetY: 8 })
+        .padding(28).backgroundColor(CARD_BG).borderRadius(24)
+        .shadow({ radius: 24, color: '#26000000', offsetX: 0, offsetY: 10 })
         .width('85%').alignItems(HorizontalAlign.Center)
       }.width('100%').height('100%').position({ x: 0, y: 0 }).zIndex(200)
     }
@@ -300,16 +309,16 @@ struct HexagonsPage {
   private cellColor(idx: number): string {
     const isC = this.challengeCells.includes(idx);
     const isS = this.selectedCells.includes(idx);
-    if (this.gameState === 'SHOW_CHALLENGE') return isC ? '#4CAF50' : '#BDBDBD';
-    if (this.gameState === 'USER_INPUT') return isS ? '#2196F3' : '#E0E0E0';
-    if (this.gameState === 'SUCCESS') return isC ? '#4CAF50' : '#E0E0E0';
+    if (this.gameState === 'SHOW_CHALLENGE') return isC ? SUCCESS : '#CBD5E1';
+    if (this.gameState === 'USER_INPUT') return isS ? THEME : '#E5E7EB';
+    if (this.gameState === 'SUCCESS') return isC ? SUCCESS : '#E5E7EB';
     if (this.gameState === 'FAILURE') {
-      if (isC && isS) return '#4CAF50';
-      if (isC && !isS) return '#FFC107';
-      if (!isC && isS) return '#F44336';
-      return '#E0E0E0';
+      if (isC && isS) return SUCCESS;
+      if (isC && !isS) return '#FFC83D';
+      if (!isC && isS) return DANGER;
+      return '#E5E7EB';
     }
-    return '#E0E0E0';
+    return '#E5E7EB';
   }
 
   // ── UI helpers ─────────────────────────────────────
@@ -326,10 +335,17 @@ struct HexagonsPage {
   }
 
   private stateColor(): string {
-    if (this.gameState === 'SUCCESS') return '#4CAF50';
-    if (this.gameState === 'FAILURE') return '#F44336';
-    if (this.gameState === 'SHOW_CHALLENGE') return '#FF9800';
-    return '#2196F3';
+    if (this.gameState === 'SUCCESS') return SUCCESS;
+    if (this.gameState === 'FAILURE') return DANGER;
+    if (this.gameState === 'SHOW_CHALLENGE') return '#FFB020';
+    return THEME;
+  }
+
+  private tintBg(hex: string): string {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r},${g},${b},0.12)`;
   }
 
   // ── Build ──────────────────────────────────────────
@@ -340,9 +356,9 @@ struct HexagonsPage {
         // Top bar
         Row() {
           Button({ type: ButtonType.Circle }) {
-            Text('⏸').fontSize(18).fontColor('#000000')
+            Text('⏸').fontSize(18).fontColor(TEXT_MAIN)
           }
-          .width(44).height(44).backgroundColor('rgba(0,0,0,0.06)')
+          .width(44).height(44).backgroundColor('rgba(255,255,255,0.82)')
           .onClick(() => {
             if (!this.isGameOver) {
               this.flowId = this.flowId + 1;
@@ -350,41 +366,52 @@ struct HexagonsPage {
             }
           })
           Blank()
-          Text('六边形').fontSize(20).fontWeight(FontWeight.Bold).fontColor('#000000')
+          Text('蜂巢记忆').fontSize(19).fontWeight(FontWeight.Bold).fontColor(TEXT_MAIN)
           Blank()
           Row({ space: 4 }) {
             ForEach(
               [0, 1, 2] as number[],
               (i: number) => {
                 Text(i < this.lives ? '❤' : '♡').fontSize(20)
-                  .fontColor(i < this.lives ? '#F44336' : '#BDBDBD')
+                  .fontColor(i < this.lives ? DANGER : '#CBD5E1')
               },
               (i: number) => `hxl_${i}`
             )
           }
         }
-        .width('100%').height(56).padding({ left: 12, right: 12 }).alignItems(VerticalAlign.Center)
+        .width('100%').height(64).padding({ left: 14, right: 14 }).alignItems(VerticalAlign.Center)
 
         Row() {
-          Text(`关卡 ${this.level}`).fontSize(14).fontColor('#616161')
+          Text(`关卡 ${this.level}`).fontSize(14).fontColor(TEXT_SUB).fontWeight(FontWeight.Bold)
+            .padding({ left: 14, right: 14, top: 6, bottom: 6 })
+            .backgroundColor('rgba(255,255,255,0.76)')
+            .borderRadius(999)
           Blank()
-          Text(`得分: ${this.score}`).fontSize(14).fontColor('#673AB7').fontWeight(FontWeight.Bold)
+          Text(`得分 ${this.score}`).fontSize(14).fontColor(THEME).fontWeight(FontWeight.Bold)
+            .padding({ left: 14, right: 14, top: 6, bottom: 6 })
+            .backgroundColor('rgba(255,255,255,0.76)')
+            .borderRadius(999)
         }
         .width('100%').padding({ left: 16, right: 16, bottom: 6 })
 
-        Divider().color('#E0E0E0')
-
         // State indicator
         Text(this.stateText())
-          .fontSize(15).fontColor(this.stateColor()).fontWeight(FontWeight.Medium)
+          .fontSize(18).fontColor(this.stateColor()).fontWeight(FontWeight.Bold)
           .textAlign(TextAlign.Center).width('100%')
-          .padding({ top: 10, bottom: 6 })
+          .padding({ top: 12, bottom: 12, left: 16, right: 16 })
+          .backgroundColor(this.tintBg(this.stateColor()))
+          .borderRadius(18)
+          .shadow({ radius: 8, color: '#12000000', offsetX: 0, offsetY: 3 })
+          .margin({ left: 16, right: 16, top: 4, bottom: 4 })
 
         // Canvas
         Canvas(this.ctx)
           .width('100%')
           .layoutWeight(1)
-          .backgroundColor('#F5F5F5')
+          .backgroundColor(CARD_BG)
+          .borderRadius(24)
+          .shadow({ radius: 14, color: '#14000000', offsetX: 0, offsetY: 6 })
+          .margin({ left: 12, right: 12, top: 4, bottom: 8 })
           .onReady(() => {
             this.canvasReady = true;
             this.startGame();
@@ -400,10 +427,10 @@ struct HexagonsPage {
 
         // Bottom hint
         Text(this.gameState === 'SHOW_CHALLENGE' ? '观察完毕后将隐藏' : '点击正确的六边形位置')
-          .fontSize(12).fontColor('#9E9E9E').textAlign(TextAlign.Center)
+          .fontSize(12).fontColor(TEXT_SUB).textAlign(TextAlign.Center)
           .width('100%').padding({ top: 6, bottom: 12 })
       }
-      .width('100%').height('100%').backgroundColor('#F5F5F5')
+      .width('100%').height('100%').backgroundColor(PAGE_BG)
 
       HexPause({
         visible: this.isPaused,
