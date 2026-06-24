@@ -50,20 +50,21 @@ function genChallenge(total: number, count: number): number[] {
 }
 
 function hexCenterXY(row: number, col: number, radius: number, W: number, H: number, gs: number): number[] {
-  const hs = radius * 1.73;
-  const vs = radius * 1.5;
+  // Pointy-top hexagon: width = sqrt(3)*r, height = 2r
+  const hs = radius * 1.7320508;  // horizontal spacing = hex width
+  const vs = radius * 1.5;        // vertical spacing
   const off = row % 2 === 1 ? hs / 2 : 0;
-  const x = col * hs + off + radius * 2;
-  const y = row * vs + radius * 2;
-  const tw = (gs - 1) * hs + hs / 2;
-  const th = (gs - 1) * vs;
-  const cox = (W - tw) / 2;
-  const coy = (H - th) / 2;
-  return [x + cox, y + coy];
+  // Bounding box of full grid (including half-hex margins on edges)
+  const totalWidth = (gs + 0.5) * hs;
+  const totalHeight = (gs - 1) * vs + 2 * radius;
+  // Shift so leftmost/topmost hex edge sits at the canvas centering offset
+  const shiftX = (W - totalWidth) / 2 + hs / 2;
+  const shiftY = (H - totalHeight) / 2 + radius;
+  return [col * hs + off + shiftX, row * vs + shiftY];
 }
 
 function touchToHex(tx: number, ty: number, W: number, H: number, gs: number): number {
-  const radius = Math.min(W / (gs * 2.2), H / (gs * 2.2));
+  const radius = Math.min(W / ((gs + 0.5) * 1.7320508), H / ((gs - 1) * 1.5 + 2));
   for (let row = 0; row < gs; row++) {
     for (let col = 0; col < gs; col++) {
       const p = hexCenterXY(row, col, radius, W, H, gs);
@@ -267,7 +268,8 @@ struct HexagonsPage {
     const W = this.ctx.width;
     const H = this.ctx.height;
     const gs = this.gridSize;
-    const radius = Math.min(W / (gs * 2.2), H / (gs * 2.2));
+    // Fit pointy-top hexagons: width bound = (gs+0.5)*sqrt(3)*r, height bound = ((gs-1)*1.5 + 2)*r
+    const radius = Math.min(W / ((gs + 0.5) * 1.7320508), H / ((gs - 1) * 1.5 + 2));
 
     this.ctx.clearRect(0, 0, W, H);
 
@@ -283,7 +285,8 @@ struct HexagonsPage {
   private drawHex(cx: number, cy: number, r: number, color: string): void {
     this.ctx.beginPath();
     for (let i = 0; i <= 6; i++) {
-      const angle = Math.PI / 3 * i;
+      // +PI/6 rotates to pointy-top orientation (vertex up/down, flat left/right edges)
+      const angle = Math.PI / 3 * i + Math.PI / 6;
       const px = cx + r * Math.cos(angle);
       const py = cy + r * Math.sin(angle);
       if (i === 0) this.ctx.moveTo(px, py);
