@@ -370,6 +370,44 @@ struct Game248Page {
     return this.selectedCells.includes(this.colRowToCell(col, row));
   }
 
+  @Builder
+  renderGridCell(idx: number) {
+    let col = idx % 6;
+    let row = Math.floor(idx / 6);
+    let isCorner = (col===0||col===5) && (row===0||row===5);
+    let isArrow = !isCorner && (col===0||col===5||row===0||row===5);
+    let isGame = col>=1&&col<=4&&row>=1&&row<=4;
+    let ct = this.grid[col][row];
+    let sel = this.isSelected(col, row);
+
+    if (isCorner) {
+      Column().width('100%').height('100%').backgroundColor('transparent')
+    } else if (isArrow) {
+      Stack() {
+        Column().width('100%').height('100%').backgroundColor('#546E7A').borderRadius(8)
+        Text(this.arrowLabel(col, row)).fontSize(18).fontColor('#FFFFFF').fontWeight(FontWeight.Bold)
+      }
+      .width('100%').height('100%')
+      .onClick(() => this.arrowAction(col, row))
+    } else if (isGame) {
+      Stack() {
+        Column().width('100%').height('100%')
+          .backgroundColor(sel ? '#FFFFFF' : CELL_COLORS[ct])
+          .borderRadius(8)
+          .border({ width: sel ? 3 : 0, color: CELL_COLORS[ct] })
+          .scale({ x: sel ? 0.88 : 1.0, y: sel ? 0.88 : 1.0 })
+          .animation({ duration: 120, curve: Curve.EaseOut })
+        if (sel) {
+          Column().width(14).height(14).borderRadius(7)
+            .backgroundColor(CELL_COLORS[ct])
+        }
+      }
+      .width('100%').height('100%')
+    } else {
+      Column().width('100%').height('100%').backgroundColor('#E0E0E0').borderRadius(8)
+    }
+  }
+
   build() {
     Stack() {
       Column() {
@@ -414,40 +452,8 @@ struct Game248Page {
         Stack() {
           Grid() {
             ForEach(make36(), (idx: number) => {
-              const col = idx % 6;
-              const row = Math.floor(idx / 6);
-              const isCorner = (col===0||col===5) && (row===0||row===5);
-              const isArrow = !isCorner && (col===0||col===5||row===0||row===5);
-              const isGame = col>=1&&col<=4&&row>=1&&row<=4;
-              const ct = this.grid[col][row];
-              const sel = this.isSelected(col, row);
               GridItem() {
-                if (isCorner) {
-                  Column().width('100%').height('100%').backgroundColor('transparent')
-                } else if (isArrow) {
-                  Stack() {
-                    Column().width('100%').height('100%').backgroundColor('#546E7A').borderRadius(8)
-                    Text(this.arrowLabel(col, row)).fontSize(18).fontColor('#FFFFFF').fontWeight(FontWeight.Bold)
-                  }
-                  .width('100%').height('100%')
-                  .onClick(() => this.arrowAction(col, row))
-                } else if (isGame) {
-                  Stack() {
-                    Column().width('100%').height('100%')
-                      .backgroundColor(sel ? '#FFFFFF' : CELL_COLORS[ct])
-                      .borderRadius(8)
-                      .border({ width: sel ? 3 : 0, color: CELL_COLORS[ct] })
-                      .scale({ x: sel ? 0.88 : 1.0, y: sel ? 0.88 : 1.0 })
-                      .animation({ duration: 120, curve: Curve.EaseOut })
-                    if (sel) {
-                      Column().width(14).height(14).borderRadius(7)
-                        .backgroundColor(CELL_COLORS[ct])
-                    }
-                  }
-                  .width('100%').height('100%')
-                } else {
-                  Column().width('100%').height('100%').backgroundColor('#E0E0E0').borderRadius(8)
-                }
+                this.renderGridCell(idx)
               }
             }, (idx: number) => `g_${idx}`)
           }
