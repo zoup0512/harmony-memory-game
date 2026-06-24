@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\24790\\.ohos\\config\\default_memory_game_VgqW03U-cH-HGSf_Yje4id5elThSy3BcTIiOpQZM9u8=.cer",
+          "certpath": "./sign/debug/debug.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001BF9FAC45E57C03B9A97998C49DE032EA375D1EC6FA802F0BFC4D2435233AD600C77A73ECE0C0FBC",
-          "profile": "C:\\Users\\24790\\.ohos\\config\\default_memory_game_VgqW03U-cH-HGSf_Yje4id5elThSy3BcTIiOpQZM9u8=.p7b",
+          "keyPassword": "0000001B8A44A43059D509CE26E676F20A7F81093408ECACA1CAE18CD15E126C60559A646D04838992F934",
+          "profile": "./sign/debug/debug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\24790\\.ohos\\config\\default_memory_game_VgqW03U-cH-HGSf_Yje4id5elThSy3BcTIiOpQZM9u8=.p12",
-          "storePassword": "0000001BC7455FD8F88C159A3FF49298B7F0C99E819E2EB064F531AB557BCBAB97B797FEB532B263F930A5"
+          "storeFile": "./sign/debug/debug.p12",
+          "storePassword": "0000001B50DD5AD59D5619C2B6000195A46A0F901A333AC786E85250C15EB5DD3A2FB6B64E69DF731167DA"
         }
       }
     ],
